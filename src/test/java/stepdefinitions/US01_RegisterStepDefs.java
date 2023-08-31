@@ -14,6 +14,8 @@ import java.sql.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static utilities.JDBCUtils.connectToDatabase;
+import static utilities.JDBCUtils.executeQuery;
 import static utilities.JSUtils.clickElementByJS;
 
 public class US01_RegisterStepDefs {
@@ -50,7 +52,7 @@ public class US01_RegisterStepDefs {
         registerPage.surNameInput.sendKeys(surname);
         registerPage.birthPlaceInput.sendKeys(birth_place);
         fakePhoneNumber = faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(1000, 9999);
-        registerPage.phoneNumberInput.sendKeys(phone_number);
+        registerPage.phoneNumberInput.sendKeys(fakePhoneNumber);
 
         if (gender.equalsIgnoreCase("male")) {
             clickElementByJS(registerPage.maleRadioButton);
@@ -61,9 +63,9 @@ public class US01_RegisterStepDefs {
 
         registerPage.birthDay.sendKeys(birth_day);
         fakeSsn = faker.idNumber().ssnValid();
-        registerPage.ssnInput.sendKeys(ssn);
+        registerPage.ssnInput.sendKeys(fakeSsn);
         fakeUsername = faker.name().username();
-        registerPage.userNameInput.sendKeys(username);
+        registerPage.userNameInput.sendKeys(fakeUsername);
         registerPage.passwordInput.sendKeys(password);
     }
 
@@ -89,7 +91,7 @@ public class US01_RegisterStepDefs {
     @Given("connect to database")
     public void connect_to_database() throws SQLException {
 
-        connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+        //connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
 
 
     }
@@ -97,11 +99,12 @@ public class US01_RegisterStepDefs {
     @When("get guest user via username {string}")
     public void get_guest_user_via_username(String username) throws SQLException {
 
-        statement = connection.createStatement();
+        // statement = connection.createStatement();
 
-        String query = "select * from guest_user where username = '" + username + "'";
+        String query = "select * from guest_user where username = '" + fakeUsername + "'";
 
-        resultSet = statement.executeQuery(query);
+        // resultSet = statement.executeQuery(query);
+        resultSet = executeQuery(query);
 
     }
 
@@ -123,11 +126,10 @@ public class US01_RegisterStepDefs {
         assertEquals(birthplace, actualBirthPlace);
         assertEquals(gender, actualGender);
         assertEquals(name, actualName);
-        assertEquals(phoneNumber, actualPhoneNumber);
-        assertEquals(ssn, actualSsn);
+        assertEquals(fakePhoneNumber, actualPhoneNumber);
+        assertEquals(fakeSsn, actualSsn);
         assertEquals(surname, actualSurname);
-        assertEquals(username, actualUsername);
-
+        assertEquals(fakeUsername, actualUsername);
 
 
     }
