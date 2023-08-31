@@ -10,8 +10,7 @@ import utilities.Driver;
 import utilities.JDBCUtils;
 import utilities.ReusableMethods;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,6 +22,9 @@ public class US01_RegisterStepDefs {
     private static String fakeUsername;
     private static String fakeSsn;
     private static String fakePhoneNumber;
+    Connection connection;
+    Statement statement;
+    ResultSet resultSet;
 
 
     @Given("go to the {string}")
@@ -47,7 +49,7 @@ public class US01_RegisterStepDefs {
         registerPage.nameInput.sendKeys(name);
         registerPage.surNameInput.sendKeys(surname);
         registerPage.birthPlaceInput.sendKeys(birth_place);
-        fakePhoneNumber = faker.number().numberBetween(100, 999) + "-" + faker.number().numberBetween(100, 999) + "-" + faker.number().numberBetween(1000, 9999);
+        fakePhoneNumber = faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(1000, 9999);
         registerPage.phoneNumberInput.sendKeys(fakePhoneNumber);
 
         if (gender.equalsIgnoreCase("male")){
@@ -83,5 +85,36 @@ public class US01_RegisterStepDefs {
         Driver.getDriver().quit();
 
     }
+
+    @Given("connect to database")
+    public void connect_to_database() throws SQLException {
+
+        connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management","select_user","43w5ijfso");
+
+
+    }
+
+    @When("get guest user via username {string}")
+    public void get_guest_user_via_username(String username) throws SQLException {
+
+       statement = connection.createStatement();
+
+       String query = "select * from guest_user where username = '"+username+"'";
+
+       resultSet = statement.executeQuery(query);
+
+    }
+
+    @Then("validate body contains birthday {string}, birthplace {string}, gender {string}, name {string}, phoneNumber {string}, ssn {string}, surname {string}, username {string}")
+    public void validate_body_contains_birthday_birthplace_gender_name_phone_number_ssn_surname_username(String birthday, String birthplace, String gender, String name, String phoneNumber, String ssn, String surname, String username) throws SQLException {
+
+        resultSet.next();
+        System.out.println(resultSet.getString("birth_day"));
+
+
+
+
+    }
+
 
 }
