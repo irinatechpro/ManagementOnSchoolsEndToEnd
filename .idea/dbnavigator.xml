@@ -13,7 +13,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="87318b0a-5a9a-494c-af2e-890d521b6360">
-      <console name="ManagementOnSchools" type="STANDARD" schema="public" session="Main"><![CDATA[select * from guest_user where username = 'johndoe151']]></console>
+      <console name="ManagementOnSchools" type="STANDARD" schema="public" session="Main"><![CDATA[select * from guest_user]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -63,7 +63,7 @@
           <deprecated-pwd value="NDN3NWlqZnNv" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />
@@ -86,7 +86,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="true" />
-          <connect-automatically value="false" />
+          <connect-automatically value="true" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="false" />
           <environment-type value="default" />

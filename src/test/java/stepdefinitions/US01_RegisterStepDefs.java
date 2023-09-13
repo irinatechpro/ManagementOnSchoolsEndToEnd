@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import pages.HomePage;
 import pages.RegisterPage;
 import utilities.Driver;
@@ -12,9 +14,10 @@ import utilities.ReusableMethods;
 
 import java.sql.*;
 
+import static base_urls.ManagementOnSchoolBaseUrl.spec;
+import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static utilities.JDBCUtils.connectToDatabase;
 import static utilities.JDBCUtils.executeQuery;
 import static utilities.JSUtils.clickElementByJS;
 
@@ -24,8 +27,6 @@ public class US01_RegisterStepDefs {
     private static String fakeUsername;
     private static String fakeSsn;
     private static String fakePhoneNumber;
-    Connection connection;
-    Statement statement;
     ResultSet resultSet;
 
 
@@ -131,6 +132,45 @@ public class US01_RegisterStepDefs {
         assertEquals(surname, actualSurname);
         assertEquals(fakeUsername, actualUsername);
 
+
+    }
+
+    Response response;
+
+    @Given("Send get request by id {string}")
+    public void sendGetRequestById(String id) {
+        //https://managementonschools.com/app/guestUser/getAll?size=1000
+        spec.pathParams("first", "guestUser", "second", "getAll").
+                queryParams("size", "1000");
+
+        response = given(spec).get("{first}/{second}");
+        //response.prettyPrint();
+    }
+
+    @Then("body should be: username={string} ssn={string} name={string} surname={string} birthDay={string} birthPlace={string} phoneNumber={string} gender={string}")
+    public void bodyShouldBeUsernameSsnNameSurnameBirthDayBirthPlacePhoneNumberGender(String username, String ssn, String name, String surname, String birthDay, String birthPlace, String phoneNumber, String gender) {
+
+        JsonPath jsonPath = response.jsonPath();
+        String actUsername = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.username").get(0).toString();
+        String actSsn = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.ssn").get(0).toString();
+        String actName = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.birthDay").get(0).toString();
+        String actBirthPlace = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.birthPlace").get(0).toString();
+        String actPhoneNumber = jsonPath.getList("content.findAll{it.username=='" + fakeUsername + "'}.phoneNumber").get(0).toString();
+        String actGender = jsonPath.getList("content.findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
+
+        assertEquals(200, response.statusCode());
+        assertEquals(fakeUsername, actUsername);
+        assertEquals(fakeSsn, actSsn);
+        assertEquals(name, actName);
+        assertEquals(surname, actSurname);
+        assertEquals(birthDay, actBirthDay);
+        assertEquals(birthPlace, actBirthPlace);
+        assertEquals(fakePhoneNumber, actPhoneNumber);
+        assertEquals(gender, actGender);
+
+        JDBCUtils.closeConnection();
 
     }
 

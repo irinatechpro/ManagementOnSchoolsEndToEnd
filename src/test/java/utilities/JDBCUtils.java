@@ -7,7 +7,7 @@ import java.util.List;
 public class JDBCUtils {
 
 
-    //Bu method ManagementOnSchool database ile bağlantı kurup Connection data döner
+    //This method establishes a connection with the ManagementOnSchool database and returns Connection data
     public static Connection connectToDatabase() {
         Connection connection;
         try {
@@ -19,7 +19,7 @@ public class JDBCUtils {
     }
 
 
-    //Bu method connectToDatabase() methodunu içinde çağırarak bir statement objesi oluşturup return yapar
+    //This method creates and returns a statement object by calling the connectToDatabase() method
     public static Statement createStatement() {
         Statement statement;
         try {
@@ -31,7 +31,7 @@ public class JDBCUtils {
     }
 
 
-    //Bu method bir SQL query'yi çalıştırıp data dönüyorsa true, dönmüyorsa false verir
+    //This method runs a SQL query and returns true if data is returned, false otherwise
     public static boolean execute(String sql) {
 
         try {
@@ -43,7 +43,7 @@ public class JDBCUtils {
     }
 
 
-    //Bu method bir SQL query'yi çalıştırıp sonucu ResultSet olarak döner
+    //This method runs a SQL query and returns the result as ResultSet
     public static ResultSet executeQuery(String sql) {
 
         try {
@@ -54,7 +54,7 @@ public class JDBCUtils {
 
     }
 
-    //Bu method istediğimiz bir table'ın isteğimiz bir sütunu list olarak döner
+    //This method returns a column of any table we want as a list
     public static List<Object> getColumnList(String tableName, String columnName) throws SQLException {
 
         List<Object> list = new ArrayList<>();
@@ -69,7 +69,7 @@ public class JDBCUtils {
 
     }
 
-    //Bu method bağlantıyı kapatır
+    //This method closes the connection
     public static void closeConnection() {
 
         try {
