@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Database151Project" />
-        <module name="ManagementOnSchoolsEndToEnd" />
+        <module name="DatabaseValidattion151" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ManagementOnSchoolsEndToEnd" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -12,8 +12,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="87318b0a-5a9a-494c-af2e-890d521b6360">
-      <console name="ManagementOnSchools" type="STANDARD" schema="public" session="Main"><![CDATA[select * from guest_user]]></console>
+    <connection id="00055a78-d2c3-45aa-9838-9ae90af91896">
+      <console name="ManagementOnSchools" type="STANDARD" schema="school_management" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -25,24 +25,13 @@
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
-  <component name="DBNavigator.Project.MethodExecutionManager">
-    <method-browser />
-    <execution-history>
-      <group-entries value="true" />
-      <execution-inputs />
-    </execution-history>
-    <argument-values-cache />
-  </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
-  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
-  </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="87318b0a-5a9a-494c-af2e-890d521b6360" active="true" signed="true">
+      <connection id="00055a78-d2c3-45aa-9838-9ae90af91896" active="true" signed="true">
         <database>
           <name value="ManagementOnSchools" />
           <description value="" />
@@ -63,7 +52,7 @@
           <deprecated-pwd value="NDN3NWlqZnNv" />
         </database>
         <properties>
-          <auto-commit value="true" />
+          <auto-commit value="false" />
         </properties>
         <ssh-settings>
           <active value="false" />
