@@ -10,4 +10,4 @@ Feature: Registration Feature
 
     Examples:
       | username  | birth_day  | birth_place | gender | name | phone_number | ssn         | surname | password |
-      | johndoe13 | 01-01-2000 | New York    | Male   | John | 332-654-3987 | 139-35-7836 | Doe     | John.123 |
+      | johndoe17 | 01-01-2000 | New York    | Male   | John | 377-654-3987 | 179-35-7836 | Doe     | John.123 |

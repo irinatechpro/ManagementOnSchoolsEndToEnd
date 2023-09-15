@@ -37,7 +37,13 @@ public class US01_RegisterStepDefs {
         registerPage.surNameInput.sendKeys(surname);
         registerPage.birthPlaceInput.sendKeys(birth_place);
         registerPage.phoneNumberInput.sendKeys(phone_number);
-        clickElementByJS(registerPage.femaleRadioButton);
+
+        if (gender.equalsIgnoreCase("male")){
+            clickElementByJS(registerPage.maleRadioButton);
+        }else {
+            clickElementByJS(registerPage.femaleRadioButton);
+        }
+
         registerPage.birthDay.sendKeys(birth_day);
         registerPage.ssnInput.sendKeys(ssn);
         registerPage.userNameInput.sendKeys(username);
