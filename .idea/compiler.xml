@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DatabaseValidattion151" />
+        <module name="ManagementOnSchoolsEndToEnd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ManagementOnSchoolsEndToEnd" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
