@@ -36,7 +36,6 @@ public class JDBCUtils {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     //This method runs a SQL query and returns the result as ResultSet

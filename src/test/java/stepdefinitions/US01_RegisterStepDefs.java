@@ -48,7 +48,7 @@ public class US01_RegisterStepDefs {
         registerPage.birthPlaceInput.sendKeys(birth_place);
 
         fakePhoneNumber = faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(100, 999) + " " + faker.number().numberBetween(1000, 9999);
-        System.out.println("fakePhoneNumber = " + fakePhoneNumber);
+        //System.out.println("fakePhoneNumber = " + fakePhoneNumber);
         registerPage.phoneNumberInput.sendKeys(fakePhoneNumber);
 
         if (gender.equalsIgnoreCase("male")) {
@@ -60,11 +60,11 @@ public class US01_RegisterStepDefs {
         registerPage.birthDay.sendKeys(birth_day);
 
         fakeSsn = faker.idNumber().ssnValid();
-        System.out.println("fakeSsn = " + fakeSsn);
+        //System.out.println("fakeSsn = " + fakeSsn);
         registerPage.ssnInput.sendKeys(fakeSsn);
 
         fakeUsername = faker.name().username();
-        System.out.println("fakeUsername = " + fakeUsername);
+        //System.out.println("fakeUsername = " + fakeUsername);
         registerPage.userNameInput.sendKeys(fakeUsername);
 
         registerPage.passwordInput.sendKeys(password);
@@ -90,7 +90,7 @@ public class US01_RegisterStepDefs {
     public void connect_to_database() throws SQLException {
 
         //connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
-        //The connectio will be created when we call executeQuery() method from JDBCUtils class.
+        //The connection will be created when we call executeQuery() method from JDBCUtils class.
     }
     @When("get guest user via username {string}")
     public void get_guest_user_via_username(String username) throws SQLException {
